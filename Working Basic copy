@@ -1,4 +1,4 @@
-function CopyColumns_1G() { //    WORKS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function CopyColumns_1H() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const inputSheet = ss.getSheetByName("Input");
   const outputSheet = ss.getSheetByName("Output");
@@ -31,7 +31,7 @@ function CopyColumns_1G() { //    WORKS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     'Clinic Doors', 'BV Doors', 'CR Doors', 'ECC Doors', 'EA Doors',
     'EdCtr Doors', 'GC Doors', 'HA Doors', 'HP Doors', 'LO Doors',
     'LP Doors', 'LA Doors', 'MO Doors', 'SH Doors', 'PO Doors',
-    'SB Doors', 'RP Doors', 'PR Doors', 'REN Doors', 'WCHS Doors'
+    'SB Doors', 'RP Doors', 'REN Doors', 'WCHS Doors'
   ];
 
   // Define the list of "Doors" input columns to combine for "Doors2"
@@ -96,7 +96,7 @@ function CopyColumns_1G() { //    WORKS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     if (typeof name === 'string' && name.includes("-")) {
       const splitName = name.split("-");
-      id = splitName[0].trim(); // CORRECTED: Access the first element of the array
+      id = splitName; // CORRECTED: Access the first element of the array
       name = splitName.slice(1).join("-").trim();
     } else if (typeof name === 'string') {
         id = name.trim();
@@ -186,16 +186,11 @@ function CopyColumns_1G() { //    WORKS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
   }
 
-Logger.log(outputData[0])
-Logger.log("Number of rows: " + outputData.length);      // Output: 3
-Logger.log("Columns in the first row: " + outputData[0].length); // Output: 3
-Logger.log("Columns in the second row: " + outputData[1].length); // Output: 2
-
   // Clear existing content in the Output sheet (except for the header row)
-  outputSheet.getRange(2, 1, outputSheet.getLastRow() || 2, outputSheet.getLastColumn() || outputData.length).clearContent();
+  outputSheet.getRange(2, 1, outputSheet.getLastRow() || 2, outputSheet.getLastColumn() || outputData[0].length).clearContent(); // Corrected column count in clearContent
 
   // Write all the processed data to the Output sheet in one operation
-  outputSheet.getRange(1, 1, outputData.length, outputData[0].length).setValues(outputData);
+  outputSheet.getRange(1, 1, outputData.length, outputData[0].length).setValues(outputData); // Corrected column count in getRange
 
   // SpreadsheetApp.getUi().alert('Data copied, split, and duplicates removed (batch operation)!'); // Commented out
 }
