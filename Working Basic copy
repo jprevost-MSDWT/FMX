@@ -1,7 +1,7 @@
 function CopyColumns_1H() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const inputSheet = ss.getSheetByName("Input");
-  const outputSheet = ss.getSheetByName("Output");
+  const outputSheet = ss.getSheetByName("Output-stage1");
 
   const inputData = inputSheet.getDataRange().getValues();
   const inputHeaders = inputData[0]; // Access the first row (index 0) for headers
