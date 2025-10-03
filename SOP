@@ -1,0 +1,66 @@
+Standard Operating Procedures (SOPs)
+This document outlines the standard procedures for our collaborative work. I will follow these guidelines in all subsequent requests unless specifically instructed otherwise.
+Version: 2.06
+(Updated:10/1/25 13:44)
+Note: I will automatically update this timestamp with the current date and time whenever we modify this SOP document.
+1. File Header Requirement
+At the top of all files, there must be a comment block containing the Project Name, Project Version, the filename, and the File Version.
+Project Name: The name of the overall project.
+Project Version: A single version number for the entire project/chat.
+File Version: A version number specific to the individual file.
+Example for a .gs file:
+// Project Name: MyProject
+// Project Version: 1.01
+// Filename: MyScript.gs
+// File Version: 1.01
+
+Example for a .html file:
+<!--
+Project Name: MyProject
+Project Version: 1.01
+Filename: MyWebApp.html
+File Version: 1.01
+-->
+
+2. Revision Numbering
+We will use a dual versioning system to track both the overall project and individual files. Both will use a MAJOR.MINOR format (XX.YY).
+Project Version:
+This is a single version number shared across all files in a chat (e.g., Project Version: 1.01).
+It should be updated manually when a major project milestone is reached.
+File Version:
+Each file will have its own independent version number (e.g., File Version: 1.01).
+Starting Version: All new files begin at File Version 1.01.
+Minor Revisions: Increment the MINOR number (e.g., 1.01 to 1.02) for small changes, bug fixes, or minor feature additions.
+Major Revisions: Increment the MAJOR number and reset the MINOR to 01 (e.g., 1.09 to 2.01) when there is a significant change in functionality, a major refactoring, or a substantial new feature is added.
+Project Version Updates: When a File Version receives a MAJOR revision update, the Project Version should also receive at least a MINOR revision update.
+Filename Stability: The filename itself will not change with new revisions. Versions are tracked exclusively within the file's header comment.
+3. Backup & Stability Strategy
+To ensure we can easily revert changes and maintain stable code, we will use a three-file system and a single-response update process.
+Filename: This is our primary, active working file where all current edits are made.
+Filename - latest revision: This file holds a copy of the previous minor version.
+Filename - latest stable version: This file serves as a backup of the last major, stable release.
+Single-Response Update Workflow: When a code change requires a backup, all necessary files (the updated main file and its backups) will be delivered in a single, comprehensive response. The updated main file will always be listed first in the response to prioritize it.
+4. File Creation Protocol
+Explicit Instruction Required: Do not create any new files beyond the established three-file system for a given project unless I provide a specific and explicit instruction to create a new file.
+Confirmation: If there is any ambiguity or uncertainty about whether a new file should be created, you must ask for confirmation before proceeding.
+5. Development Environment & Best Practices
+Default Assumption: All code development will be done with the assumption that the target environment is Google Apps Script, typically attached to a Google Sheet.
+Primary File Type: The primary file type we will work with is .gs.
+Secondary File Type: We may occasionally work with .html files for custom dialogs or sidebars within Apps Script.
+Use Batch Operations: Whenever possible, read data from a sheet into an array, process the array in memory, and then write the results back to the sheet in a single call (e.g., using getValues() and setValues()). Avoid making calls to spreadsheet services within a loop.
+Avoid Global Variables: Use function parameters and return values to pass data. For configuration data (like sheet names), a central CONFIG object is acceptable.
+Clear Naming: Use descriptive names for variables and functions (e.g., sourceSheet instead of ss, copySelectedData instead of runScript).
+UI-Independent Functions: Avoid using UI-dependent methods like SpreadsheetApp.getUi(), DocumentApp.getUi(), etc., in core logic functions. These methods will cause errors when scripts are run directly from the editor instead of from the host application's menu. UI calls should only be included in functions specifically designed to create menus or display HTML dialogs/sidebars.
+Authorization Scopes: Avoid using scope-limiting JSDoc annotations like @OnlyCurrentDoc. Script permissions should be managed through the manifest file (appsscript.json) for clarity and better control.
+6. Code Formatting & Commenting
+Standardized Headers: All files must begin with the header defined in section 1.
+Commenting: Add comments to explain the purpose of functions, complex logic, and any non-obvious parts of the code. The goal is clarity and maintainability.
+Formatting: Use consistent indentation (2 spaces) and spacing to ensure code is readable.
+7. Communication & Workflow
+Implicit SOP Adherence: It is assumed that I am following all established SOPs at all times. I will not explicitly state that I am following them in my responses and will avoid phrases such as "As per our SOP," or "Following our established procedure." I will only mention an SOP if I need clarification or if a request conflicts with one.
+SOP Synchronization:
+Master Document Reference: You can maintain a master Google Doc as your single source of truth for these SOPs: https://docs.google.com/document/d/1_iOXXVrxZ7FEph-5RPGZzrkGNMz1gHJ7A-4s2kcsx8c/edit?usp=sharing
+Initialization: To establish these SOPs in any chat (new or existing), please attach the master Google Doc. If a local Gemini code SOP.md or other SOP file doesn't already exist, I will create one using the contents of the attached document. This local file will then serve as our working reference for the chat.
+Updating: To update the local SOP, give the explicit command, "Check for SOP updates." I will first attempt to fetch the content automatically from the master document link. If I am unable to access the link in the current session, I will notify you, and you will then need to paste the full, updated content from your master document into the chat to complete the synchronization.
+
+
